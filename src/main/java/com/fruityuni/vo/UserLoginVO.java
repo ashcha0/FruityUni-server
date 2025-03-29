@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List; // 添加List的导入
 
 /**
  * 用户登录视图对象
@@ -49,3 +50,8 @@ public class UserLoginVO implements Serializable {
     
     @ApiModelProperty(value = "权限列表")
     private String[] permissions;
+
+    public void setPermissions(List<String> permissions) {
+        this.permissions = permissions.toArray(new String[0]);
+    }
+}

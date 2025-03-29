@@ -2,12 +2,12 @@ package com.fruityuni.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -18,45 +18,44 @@ import java.time.LocalDateTime;
  */
 @Data
 @TableName("product")
-@ApiModel(value = "商品信息")
-public class Product {
+@ApiModel(value = "商品")
+public class Product implements Serializable {
 
-    @ApiModelProperty(value = "商品ID")
+    private static final long serialVersionUID = 1L;
+
     @TableId(value = "id", type = IdType.AUTO)
+    @ApiModelProperty(value = "商品ID")
     private Long id;
-
-    @ApiModelProperty(value = "分类ID")
-    private Long categoryId;
 
     @ApiModelProperty(value = "商品名称")
     private String name;
 
-    @ApiModelProperty(value = "副标题")
+    @ApiModelProperty(value = "商品描述")
+    private String description;
+
+    @ApiModelProperty(value = "商品副标题")
     private String subtitle;
 
-    @ApiModelProperty(value = "主图URL")
-    private String mainImage;
+    @ApiModelProperty(value = "商品图片")
+    private String image;
 
-    @ApiModelProperty(value = "子图URL，JSON格式")
-    private String subImages;
-
-    @ApiModelProperty(value = "商品详情")
-    private String detail;
-
-    @ApiModelProperty(value = "价格")
+    @ApiModelProperty(value = "商品价格")
     private BigDecimal price;
 
-    @ApiModelProperty(value = "库存")
+    @ApiModelProperty(value = "商品原价")
+    private BigDecimal originalPrice;
+
+    @ApiModelProperty(value = "商品库存")
     private Integer stock;
 
-    @ApiModelProperty(value = "单位")
-    private String unit;
+    @ApiModelProperty(value = "商品销量")
+    private Integer sales;
+
+    @ApiModelProperty(value = "分类ID")
+    private Long categoryId;
 
     @ApiModelProperty(value = "状态：0下架，1上架")
     private Integer status;
-
-    @ApiModelProperty(value = "销量")
-    private Integer sales;
 
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createdTime;
@@ -65,6 +64,5 @@ public class Product {
     private LocalDateTime updatedTime;
 
     @ApiModelProperty(value = "是否删除：0否，1是")
-    @TableLogic
     private Integer deleted;
 }

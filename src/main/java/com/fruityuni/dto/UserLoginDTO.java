@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
-import java.io.Serializable;
 
 /**
  * 用户登录数据传输对象
@@ -13,16 +12,14 @@ import java.io.Serializable;
  * @author fruityuni
  */
 @Data
-@ApiModel(value = "用户登录数据传输对象")
-public class UserLoginDTO implements Serializable {
+@ApiModel(value = "用户登录数据")
+public class UserLoginDTO {
 
-    private static final long serialVersionUID = 1L;
-
-    @ApiModelProperty(value = "用户名", required = true)
     @NotBlank(message = "用户名不能为空")
+    @ApiModelProperty(value = "用户名", required = true)
     private String username;
 
-    @ApiModelProperty(value = "密码", required = true)
     @NotBlank(message = "密码不能为空")
+    @ApiModelProperty(value = "密码", required = true)
     private String password;
 }

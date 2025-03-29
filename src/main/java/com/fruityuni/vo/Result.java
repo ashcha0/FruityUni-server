@@ -7,7 +7,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * 统一响应结果类
+ * 统一响应结果
  *
  * @author fruityuni
  */
@@ -29,6 +29,11 @@ public class Result<T> implements Serializable {
     private Result() {
     }
 
+    private Result(Integer code, String message) {
+        this.code = code;
+        this.message = message;
+    }
+
     private Result(Integer code, String message, T data) {
         this.code = code;
         this.message = message;
@@ -36,109 +41,65 @@ public class Result<T> implements Serializable {
     }
 
     /**
-     * 成功返回结果
-     *
-     * @param <T> 数据类型
-     * @return 成功结果
+     * 成功
      */
     public static <T> Result<T> success() {
-        return new Result<>(ResultCode.SUCCESS.getCode(), ResultCode.SUCCESS.getMessage(), null);
+        return new Result<>(ResultCode.SUCCESS.getCode(), ResultCode.SUCCESS.getMessage());
     }
 
     /**
-     * 成功返回结果
-     *
-     * @param data 数据
-     * @param <T>  数据类型
-     * @return 成功结果
+     * 成功，带数据
      */
     public static <T> Result<T> success(T data) {
         return new Result<>(ResultCode.SUCCESS.getCode(), ResultCode.SUCCESS.getMessage(), data);
     }
 
     /**
-     * 成功返回结果
-     *
-     * @param message 消息
-     * @param data    数据
-     * @param <T>     数据类型
-     * @return 成功结果
+     * 成功，自定义消息
+     */
+    public static <T> Result<T> success(String message) {
+        return new Result<>(ResultCode.SUCCESS.getCode(), message);
+    }
+
+    /**
+     * 成功，自定义消息和数据
      */
     public static <T> Result<T> success(String message, T data) {
         return new Result<>(ResultCode.SUCCESS.getCode(), message, data);
     }
 
     /**
-     * 失败返回结果
-     *
-     * @param <T> 数据类型
-     * @return 失败结果
+     * 失败
      */
     public static <T> Result<T> failed() {
-        return new Result<>(ResultCode.FAILED.getCode(), ResultCode.FAILED.getMessage(), null);
+        return new Result<>(ResultCode.FAILED.getCode(), ResultCode.FAILED.getMessage());
     }
 
     /**
-     * 失败返回结果
-     *
-     * @param message 消息
-     * @param <T>     数据类型
-     * @return 失败结果
+     * 失败，自定义消息
      */
     public static <T> Result<T> failed(String message) {
-        return new Result<>(ResultCode.FAILED.getCode(), message, null);
+        return new Result<>(ResultCode.FAILED.getCode(), message);
     }
 
     /**
-     * 失败返回结果
-     *
-     * @param code    状态码
-     * @param message 消息
-     * @param <T>     数据类型
-     * @return 失败结果
+     * 失败，自定义状态码和消息
      */
     public static <T> Result<T> failed(Integer code, String message) {
-        return new Result<>(code, message, null);
+        return new Result<>(code, message);
     }
 
     /**
-     * 参数验证失败返回结果
-     *
-     * @param <T> 数据类型
-     * @return 参数验证失败结果
+     * 失败，使用ResultCode
      */
-    public static <T> Result<T> validateFailed() {
-        return new Result<>(ResultCode.VALIDATE_FAILED.getCode(), ResultCode.VALIDATE_FAILED.getMessage(), null);
+    public static <T> Result<T> failed(ResultCode resultCode) {
+        return new Result<>(resultCode.getCode(), resultCode.getMessage());
     }
 
     /**
-     * 参数验证失败返回结果
-     *
-     * @param message 消息
-     * @param <T>     数据类型
-     * @return 参数验证失败结果
+     * 失败，使用ResultCode和自定义消息
      */
-    public static <T> Result<T> validateFailed(String message) {
-        return new Result<>(ResultCode.VALIDATE_FAILED.getCode(), message, null);
-    }
-
-    /**
-     * 未登录返回结果
-     *
-     * @param <T> 数据类型
-     * @return 未登录结果
-     */
-    public static <T> Result<T> unauthorized() {
-        return new Result<>(ResultCode.UNAUTHORIZED.getCode(), ResultCode.UNAUTHORIZED.getMessage(), null);
-    }
-
-    /**
-     * 未授权返回结果
-     *
-     * @param <T> 数据类型
-     * @return 未授权结果
-     */
-    public static <T> Result<T> forbidden() {
-        return new Result<>(ResultCode.FORBIDDEN.getCode(), ResultCode.FORBIDDEN.getMessage(), null);
+    public static <T> Result<T> failed(ResultCode resultCode, String message) {
+        return new Result<>(resultCode.getCode(), message);
     }
 }

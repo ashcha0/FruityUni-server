@@ -4,26 +4,26 @@ import com.fruityuni.vo.ResultCode;
 import lombok.Getter;
 
 /**
- * 业务异常
+ * 授权异常
  *
  * @author fruityuni
  */
 @Getter
-public class BusinessException extends RuntimeException {
+public class AuthorizationException extends RuntimeException {
 
     private final Integer code;
 
-    public BusinessException(String message) {
+    public AuthorizationException(String message) {
         super(message);
-        this.code = 500;
+        this.code = 403;
     }
 
-    public BusinessException(Integer code, String message) {
+    public AuthorizationException(Integer code, String message) {
         super(message);
         this.code = code;
     }
     
-    public BusinessException(ResultCode resultCode) {
+    public AuthorizationException(ResultCode resultCode) {
         super(resultCode.getMessage());
         this.code = resultCode.getCode();
     }
